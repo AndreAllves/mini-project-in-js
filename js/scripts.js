@@ -106,35 +106,14 @@ class Calculator{
     }
 
     processEqualOperator() {
-        const operationParts = this.previousOperationText.innerText.split(" ");
-        
-        if (operationParts.length < 2) return;
-        
-        let operation = operationParts[1];
-        let previous = parseFloat(operationParts[0]);
-        let current = parseFloat(this.currentOperationText.innerText);
-        
-        if (isNaN(previous) || isNaN(current)) return;
-        
+        let operation = this.previousOperationText.innerText.split(" ")[1];
+
         this.processOperation(operation);
     }
 }
 
 const calc = new Calculator(previousOperationText, currentOperationText);
 
-function handleButtonInteraction(e) {
-    e.preventDefault(); 
-    const value = this.innerText.trim(); 
-    
-    this.classList.add('active');
-    setTimeout(() => this.classList.remove('active'), 150);
-    
-    if (+value >= 0 || value === ".") {
-        calc.addDigit(value);
-    } else {
-        calc.processOperation(value);
-    }
-}
 
 buttons.forEach((btn) => { 
     btn.addEventListener("click", (e) => {
