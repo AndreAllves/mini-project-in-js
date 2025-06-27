@@ -94,7 +94,7 @@ class Calculator{
     preocessDelOperator(){
        this.currentOperationText.innerText =
       this.currentOperationText.innerText.slice(0, -1);
-  }
+    }
 
     processClearCurrentOperator() {
         this.currentOperationText.innerText = "";

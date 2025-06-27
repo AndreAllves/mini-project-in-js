@@ -80,3 +80,42 @@ body{
     grid-column: span 2;
     background-color: #3a91d8;
 }
+
+@media (max-width: 600px) {
+    body {
+        padding: 1em;
+        height: 100vh;
+        display: flex;
+        align-items: flex-start;
+    }
+    
+    #calc {
+        width: 100%;
+        max-width: 100%;
+        margin-top: 1em;
+    }
+    
+    #current-operation {
+        font-size: 2.5em; 
+    }
+    
+    #buttons-container button {
+        height: 3.5em;
+        font-size: 1em; 
+    }
+    
+    #buttons-container {
+        gap: 2px;
+    }
+}
+
+@media (max-width: 400px) {
+    #current-operation {
+        font-size: 2em;
+    }
+    
+    #buttons-container button {
+        height: 3em;
+        font-size: 0.9em;
+    }
+}
