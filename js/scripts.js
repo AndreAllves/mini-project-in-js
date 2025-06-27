@@ -10,6 +10,8 @@ class Calculator{
     }
 
     addDigit(digit){
+        console.log(digit);
+
         if(digit === "." && this.currentOperationText.innerText.includes(".")){
             return;
         }
@@ -94,20 +96,20 @@ class Calculator{
       this.currentOperationText.innerText.slice(0, -1);
   }
 
-  processClearCurrentOperator() {
-    this.currentOperationText.innerText = "";
-  }
+    processClearCurrentOperator() {
+        this.currentOperationText.innerText = "";
+    }
 
-  processClearOperator() {
-    this.currentOperationText.innerText = "";
-    this.previousOperationText.innerText = "";
-  }
+    processClearOperator() {
+        this.currentOperationText.innerText = "";
+        this.previousOperationText.innerText = "";
+    }
 
-  processEqualOperator() {
-    let operation = this.previousOperationText.innerText.split(" ")[1];
+    processEqualOperator() {
+        let operation = this.previousOperationText.innerText.split(" ")[1];
 
-    this.processOperation(operation);
-  }
+        this.processOperation(operation);
+    }
 }
 
 const calc = new Calculator(previousOperationText, currentOperationText);
