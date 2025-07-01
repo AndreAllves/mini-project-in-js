@@ -24,7 +24,7 @@ class Calculator{
     }
 
     processOperation(operation){
-        if(this.error && operation !== "C") return;
+        if (this.error && operation !== "C" && operation !== "HIST") return;
 
         if(this.currentOperationText.innerText === ""){
             if(this.previousOperationText.innerText !== "" && operation != "="){
@@ -34,8 +34,8 @@ class Calculator{
         }
 
         let operationValue;
-        const previous = +this.previousOperationText.innerText.split(" ")[0];
-        const current  = +this.currentOperationText.innerText;
+        let previous = +this.previousOperationText.innerText.split(" ")[0];
+        let current  = +this.currentOperationText.innerText;
         
        if(isNaN(previous)){
         previous = 0
@@ -145,6 +145,7 @@ class Calculator{
 
         this.processOperation(operation);
     }
+
 }
 
 const calc = new Calculator(previousOperationText, currentOperationText);
