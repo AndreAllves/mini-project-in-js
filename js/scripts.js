@@ -27,7 +27,7 @@ class Calculator{
         if(this.error && operation !== "C") return;
 
         if(this.currentOperationText.innerText === ""){
-            if(this.previousOperationText.innerText !== ""){
+            if(this.previousOperationText.innerText !== "" && operation != "="){
                 this.changeOperation(operation);
             }
             return;
@@ -36,6 +36,12 @@ class Calculator{
         let operationValue;
         const previous = +this.previousOperationText.innerText.split(" ")[0];
         const current  = +this.currentOperationText.innerText;
+        
+        if(isNaN(previous) || isNaN(current)){
+            this.currentOperationText.innerText = "Erro!";
+            this.error = true;
+            return;
+        }
 
         switch(operation){
             case "+":
