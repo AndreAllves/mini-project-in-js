@@ -37,11 +37,13 @@ class Calculator{
         const previous = +this.previousOperationText.innerText.split(" ")[0];
         const current  = +this.currentOperationText.innerText;
         
-        if(isNaN(previous) || isNaN(current)){
-            this.currentOperationText.innerText = "Erro!";
-            this.error = true;
-            return;
-        }
+       if(isNaN(previous)){
+        previous = 0
+       }
+
+       if(isNaN(current)){
+        current = 0;
+       }
 
         switch(operation){
             case "+":
