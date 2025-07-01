@@ -7,10 +7,13 @@ class Calculator{
         this.previousOperationText = previousOperationText;
         this.currentOperationText = currentOperationText;
         this.currentOperation = ""
+        this.error = false;
     }
 
     addDigit(digit){
         console.log(digit);
+
+        if(this.error) return;
 
         if(digit === "." && this.currentOperationText.innerText.includes(".")){
             return;
@@ -21,6 +24,8 @@ class Calculator{
     }
 
     processOperation(operation){
+        if(this.error && operation !== "C") return;
+
         if(this.currentOperationText.innerText === ""){
             if(this.previousOperationText.innerText !== ""){
                 this.changeOperation(operation);
@@ -34,20 +39,16 @@ class Calculator{
 
         switch(operation){
             case "+":
-                operationValue = previous + current;
-                this.updateScreen(operationValue, operation, current, previous);
+                this.processSumOperation(previous, current);
                 break;
             case "-":
-                operationValue = previous - current;
-                this.updateScreen(operationValue, operation, current, previous);
+                this.processSubtractionOperation(previous, current);
                 break;
             case "*":
-                operationValue = previous * current;
-                this.updateScreen(operationValue, operation, current, previous);
+                this.processMultiplicationOperation(previous,current);
                 break;
             case "/":
-                operationValue = previous / current;
-                this.updateScreen(operationValue, operation, current, previous);
+                this.processDivisionOperation(previous, current);
                 break;
             case "DEL":
                 this.preocessDelOperator();
@@ -91,6 +92,31 @@ class Calculator{
       this.previousOperationText.innerText.slice(0, -1) + operation;
     }
 
+     processSumOperation(previous, current){
+        const result = previous + current;
+        this.updateScreen(result, "+", current, previous);
+    }
+
+    processSubtractionOperation(previous, current){
+        const result = previous - current;
+        this.updateScreen(result, "-", current, previous);
+    }
+
+    processMultiplicationOperation(previous, current){
+        const result = previous * current;
+        this.updateScreen(result, "*", current, previous);
+    }
+
+    processDivisionOperation(previous, current){
+        if(current === 0){
+            this.currentOperationText.innerText = "Erro: divisão por zero!\n Aperte C e efetue outra operação!";
+            this.error = true;
+            return;
+        }
+        const result = previous / current;
+        this.updateScreen(result, "/", current, previous);
+    }
+
     preocessDelOperator(){
        this.currentOperationText.innerText =
       this.currentOperationText.innerText.slice(0, -1);
@@ -103,6 +129,7 @@ class Calculator{
     processClearOperator() {
         this.currentOperationText.innerText = "";
         this.previousOperationText.innerText = "";
+        this.error = false;
     }
 
     processEqualOperator() {
